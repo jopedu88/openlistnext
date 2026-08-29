@@ -1,26 +1,20 @@
 name = "openlistnext"
-main = "src/backend/worker.ts"
-compatibility_date = "2026-08-04"
-compatibility_flags = ["nodejs_compat"]
-workers_dev = false
-preview_urls = false
+main = "src/index.ts"
+compatibility_date = "2024-12-18"
 
+# KV 绑定
+[[kv_namespaces]]
+binding = "OPENLISTNEXT_KV"
+
+# 静态资源托管（前端构建后的文件）
 [assets]
 directory = "./dist"
 binding = "ASSETS"
 
-
+# 环境变量
 [vars]
 ENVIRONMENT = "production"
-# 注意：不要在这里硬编码管理员密码！部署时请通过
-#   `wrangler secret put ADMIN_PASSWORD`  配置强密码，
-#   未配置时使用默认 admin/admin，首次登录后请立即修改。
-# JWT 签名密钥同理：`wrangler secret put JWT_SECRET`
-VITE_API_URL = "/api"
 
-[[kv_namespaces]]
-binding = "OPENLISTNEXT_KV"
-
-
-
-
+# 日志
+[observability]
+enabled = true
